@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-ssb-patchwork/node_modules/ssb-patchwork/http-server.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-ssb-patchwork">npmtest-ssb-patchwork (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-ssb-patchwork/node_modules/ssb-patchwork/http-server.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">30.39% <small>(31 / 102)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">6% <small>(3 / 50)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">26.09% <small>(6 / 23)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">32.63% <small>(31 / 95)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-ssb-patchwork/node_modules/ssb-patchwork/</a> &#187; http-server.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var pull   = require('pull-stream')
+var toPull = require('stream-to-pull-stream')
+var cat    = require('pull-cat')
+var ident  = require('pull-identify-filetype')
+var mime   = require('mime-types')
+var URL    = require('url')
+var path   = require('path')
+var fs     = require('fs')
+var refs   = require('ssb-ref')
+var Stack  = require('stack')
+var ip     = require('ip')
+&nbsp;
+var AppCSP = <span class="fstat-no" title="function not covered" >function (req, config) {</span>
+  // hostname for the websocket connection:
+  // if it's a remote request, always use the configured hostname
+  // if it's local, choose from localhost or the configured hostname, based on which the client is using (as revealed by the host header)
+<span class="cstat-no" title="statement not covered" >  var host</span>
+<span class="cstat-no" title="statement not covered" >  if (!ip.isLoopback(req.socket.remoteAddress))</span>
+<span class="cstat-no" title="statement not covered" >    host = config.getHostname()</span>
+  else {
+<span class="cstat-no" title="statement not covered" >    var requestHostname = req.headers.host.split(':')[0] </span>// extract hostname (remove ':port')
+<span class="cstat-no" title="statement not covered" >    host = (requestHostname == 'localhost' || requestHostname == config.getHostname())</span>
+      ? requestHostname
+      : (config.getHostname() || 'localhost')
+&nbsp;
+    // final glorious hack: if they're using 127.0.0.1, we should too
+<span class="cstat-no" title="statement not covered" >    if (requestHostname == '127.0.0.1' &amp;&amp; host == 'localhost')</span>
+<span class="cstat-no" title="statement not covered" >      host = '127.0.0.1'</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return "default-src 'self'; "+</span>
+    "connect-src 'self' ws://"+host+":7777 wss://"+host+":7777; "+
+    "img-src 'self' data:; "+
+    "object-src 'none'; "+
+    "frame-src 'none'; "+
+    "style-src 'self' 'unsafe-inline'; "+
+    "sandbox allow-modals allow-same-origin allow-scripts allow-top-navigation allow-popups"
+}
+var BlobCSP = <span class="fstat-no" title="function not covered" >function () {</span> <span class="cstat-no" title="statement not covered" >return "default-src none; sandbox" }</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >function respond (res, status, message) {</span>
+<span class="cstat-no" title="statement not covered" >  res.writeHead(status)</span>
+<span class="cstat-no" title="statement not covered" >  res.end(message)</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function respondSource (res, source, wrap) {</span>
+<span class="cstat-no" title="statement not covered" >  if(wrap) {</span>
+<span class="cstat-no" title="statement not covered" >    res.writeHead(200, {'Content-Type': 'text/html'})</span>
+<span class="cstat-no" title="statement not covered" >    pull(</span>
+      cat([
+        pull.once('&lt;html&gt;&lt;body&gt;&lt;script&gt;'),
+        source,
+        pull.once('&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;')
+      ]),
+      toPull.sink(res)
+    )
+  }
+  else {
+<span class="cstat-no" title="statement not covered" >    pull(</span>
+      source,
+      ident(<span class="fstat-no" title="function not covered" >function (type) {</span>
+<span class="cstat-no" title="statement not covered" >        if (type) <span class="cstat-no" title="statement not covered" >res.writeHead(200, {'Content-Type': mime.lookup(type)})</span></span>
+      }),
+      toPull.sink(res)
+    )
+  }
+}
+&nbsp;
+var Log = exports.Log = function (sbot) {
+  return <span class="fstat-no" title="function not covered" >function (req, res, next) {</span>
+<span class="cstat-no" title="statement not covered" >    sbot.emit('log:info', ['HTTP', null, req.method + ' ' + req.url])</span>
+<span class="cstat-no" title="statement not covered" >    next()</span>
+  }
+}
+&nbsp;
+var DeviceAccessControl = exports.DeviceAccessControl = function (config) {
+  return <span class="fstat-no" title="function not covered" >function (req, res, next) {</span>
+<span class="cstat-no" title="statement not covered" >    if (config.allowRemoteAccess())</span>
+<span class="cstat-no" title="statement not covered" >      return next() </span>// remote &amp; local access allowed
+<span class="cstat-no" title="statement not covered" >    if (ip.isLoopback(req.socket.remoteAddress))</span>
+<span class="cstat-no" title="statement not covered" >      return next() </span>// local access allowed
+<span class="cstat-no" title="statement not covered" >    respond(res, 403, 'Remote access forbidden') </span>// remote access disallowed
+  }
+}
+&nbsp;
+var PasswordAccessControl = exports.DeviceAccessControl = function (config) {
+  return <span class="fstat-no" title="function not covered" >function (req, res, next) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!config.requiresPassword(config))</span>
+<span class="cstat-no" title="statement not covered" >      return next() </span>// no password required
+&nbsp;
+    // check the password
+<span class="cstat-no" title="statement not covered" >    var authMatch = /^Basic (.*)$/i.exec(req.headers.authorization)</span>
+<span class="cstat-no" title="statement not covered" >    if (authMatch) {</span>
+<span class="cstat-no" title="statement not covered" >      var password = (new Buffer(authMatch[1], 'base64').toString()).split(':')[1]</span>
+<span class="cstat-no" title="statement not covered" >      if (password &amp;&amp; config.checkPassword(password))</span>
+<span class="cstat-no" title="statement not covered" >        return next() </span>// password checks out
+    }
+&nbsp;
+    // deny
+<span class="cstat-no" title="statement not covered" >    res.setHeader('WWW-Authenticate', 'Basic realm=Authorization Required')</span>
+<span class="cstat-no" title="statement not covered" >    respond(res, 401, 'Unauthorized')</span>
+  }
+}
+&nbsp;
+var ServeApp = exports.ServeApp = function (sbot, opts, config) {
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (!opts || !opts.uiPath)
+<span class="cstat-no" title="statement not covered" >    throw "opts.uiPath is required"</span>
+  return <span class="fstat-no" title="function not covered" >function (req, res, next) {</span>
+<span class="cstat-no" title="statement not covered" >    var parsed = URL.parse(req.url, true)</span>
+<span class="cstat-no" title="statement not covered" >    var pathname = parsed.pathname</span>
+<span class="cstat-no" title="statement not covered" >    if (pathname == '/')</span>
+<span class="cstat-no" title="statement not covered" >      pathname = '/main.html'</span>
+&nbsp;
+    // dynamic route: manifest.js
+<span class="cstat-no" title="statement not covered" >    if (pathname == '/manifest.js') {</span>
+<span class="cstat-no" title="statement not covered" >      res.setHeader('Content-Security-Policy', BlobCSP())</span>
+<span class="cstat-no" title="statement not covered" >      return respondSource(res, pull.once('window.MANIFEST='+JSON.stringify(sbot.manifest())+';'))</span>
+    } 
+&nbsp;
+    // static files
+<span class="cstat-no" title="statement not covered" >    var filepath = path.join(opts.uiPath, pathname)</span>
+<span class="cstat-no" title="statement not covered" >    fs.stat(filepath, <span class="fstat-no" title="function not covered" >function (err, stat) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if(err) <span class="cstat-no" title="statement not covered" >return next()</span></span>
+<span class="cstat-no" title="statement not covered" >      if(!stat.isFile()) <span class="cstat-no" title="statement not covered" >return respond(res, 403, 'May only load files')</span></span>
+&nbsp;
+      // set a special CSP for the main HTML file
+<span class="cstat-no" title="statement not covered" >      if (pathname == '/main.html')</span>
+<span class="cstat-no" title="statement not covered" >        res.setHeader('Content-Security-Policy', AppCSP(req, config)) </span>// only give the open perms to main.html
+      else
+<span class="cstat-no" title="statement not covered" >        res.setHeader('Content-Security-Policy', BlobCSP())</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      respondSource(res, toPull.source(fs.createReadStream(filepath)))</span>
+    })
+  }
+}
+&nbsp;
+var ServeBlobs = exports.ServeBlobs = function (sbot) {
+  return <span class="fstat-no" title="function not covered" >function (req, res, next) {</span>
+<span class="cstat-no" title="statement not covered" >    var parsed = URL.parse(req.url, true)</span>
+<span class="cstat-no" title="statement not covered" >    var hash = decodeURIComponent(parsed.pathname.slice(1))</span>
+<span class="cstat-no" title="statement not covered" >    sbot.blobs.want(hash, <span class="fstat-no" title="function not covered" >function(err, has) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if (!has) <span class="cstat-no" title="statement not covered" >return respond(res, 404, 'File not found')</span></span>
+&nbsp;
+      // optional name override
+<span class="cstat-no" title="statement not covered" >      if (parsed.query.name)</span>
+<span class="cstat-no" title="statement not covered" >        res.setHeader('Content-Disposition', 'inline; filename='+encodeURIComponent(parsed.query.name))</span>
+&nbsp;
+      // serve
+<span class="cstat-no" title="statement not covered" >      res.setHeader('Content-Security-Policy', BlobCSP())</span>
+<span class="cstat-no" title="statement not covered" >      respondSource(res, sbot.blobs.get(hash), false)</span>
+    })
+  }
+}
+&nbsp;
+var ServeFiles = exports.ServeFiles = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  return <span class="fstat-no" title="function not covered" >function (req, res, next) {</span></span>
+<span class="cstat-no" title="statement not covered" >    var parsed = URL.parse(req.url, true)</span>
+<span class="cstat-no" title="statement not covered" >    fs.stat(parsed.pathname, <span class="fstat-no" title="function not covered" >function (err, stat) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if(err) <span class="cstat-no" title="statement not covered" >return respond(res, 404, 'File not found')</span></span>
+<span class="cstat-no" title="statement not covered" >      if(!stat.isFile()) <span class="cstat-no" title="statement not covered" >return respond(res, 403, 'May only load files')</span></span>
+<span class="cstat-no" title="statement not covered" >      res.setHeader('Content-Security-Policy', BlobCSP())</span>
+<span class="cstat-no" title="statement not covered" >      respondSource(</span>
+        res,
+        toPull.source(fs.createReadStream(parsed.pathname)),
+        false
+      )
+    })
+  }
+}
+&nbsp;
+exports.BlobStack = <span class="fstat-no" title="function not covered" >function (sbot, opts) {</span>
+<span class="cstat-no" title="statement not covered" >  return Stack(</span>
+    Log(sbot),
+    DeviceAccessControl(),
+    ServeBlobs(sbot)
+  )
+}
+&nbsp;
+exports.FileStack = <span class="fstat-no" title="function not covered" >function (opts) {</span>
+<span class="cstat-no" title="statement not covered" >  return Stack(</span>
+    Log(sbot),
+    DeviceAccessControl(),
+    ServeFiles()
+  )
+}
+&nbsp;
+exports.AppStack = function (sbot, opts, config) {
+  return Stack(
+    Log(sbot),
+    PasswordAccessControl(config),
+    DeviceAccessControl(config),
+    ServeApp(sbot, opts, config),
+    ServeBlobs(sbot)
+  )
+}
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Wed Apr 19 2017 00:49:53 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
