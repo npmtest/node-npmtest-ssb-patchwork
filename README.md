@@ -1,6 +1,6 @@
 # npmtest-ssb-patchwork
 
-#### test coverage for  [ssb-patchwork (v2.12.4)](https://github.com/ssbc/patchwork#readme)  [![npm package](https://img.shields.io/npm/v/npmtest-ssb-patchwork.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-ssb-patchwork) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-ssb-patchwork.svg)](https://travis-ci.org/npmtest/node-npmtest-ssb-patchwork)
+#### basic test coverage for  [ssb-patchwork (v2.12.4)](https://github.com/ssbc/patchwork#readme)  [![npm package](https://img.shields.io/npm/v/npmtest-ssb-patchwork.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-ssb-patchwork) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-ssb-patchwork.svg)](https://travis-ci.org/npmtest/node-npmtest-ssb-patchwork)
 
 #### safe secure sharing
 
@@ -10,7 +10,7 @@
 |--:|:--|
 | coverage : | [![istanbul-coverage](https://npmtest.github.io/node-npmtest-ssb-patchwork/build/coverage.badge.svg)](https://npmtest.github.io/node-npmtest-ssb-patchwork/build/coverage.html/index.html)|
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-ssb-patchwork/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-ssb-patchwork/build/test-report.html)|
-| build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-ssb-patchwork/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-ssb-patchwork/tree/gh-pages/build)|
+| test-server-github : | [![github.com test-server](https://npmtest.github.io/node-npmtest-ssb-patchwork/GitHub-Mark-32px.png)](https://npmtest.github.io/node-npmtest-ssb-patchwork/build/app/index.html) | | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-ssb-patchwork/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-ssb-patchwork/tree/gh-pages/build)|
 
 - [https://npmtest.github.io/node-npmtest-ssb-patchwork/build/coverage.html/index.html](https://npmtest.github.io/node-npmtest-ssb-patchwork/build/coverage.html/index.html)
 
